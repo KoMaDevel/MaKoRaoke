@@ -46,10 +46,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\JoinMenu.cs" />
      <Compile Include="Assets\Scripts\Menu.cs" />
+     <Compile Include="Assets\Scripts\PlayerProfilesMenu.cs" />
      <Compile Include="Assets\Scripts\SongEngine.cs" />
      <Compile Include="Assets\Scripts\SongEntry.cs" />
      <Compile Include="Assets\Scripts\SongList.cs" />
+     <Compile Include="Assets\Scripts\SongMenu.cs" />
      <Compile Include="Assets\Scripts\Version.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Program Files/Unity560g3/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

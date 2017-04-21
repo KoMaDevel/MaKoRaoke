@@ -1,14 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System;
+using UnityEngine.SceneManagement;
 
 namespace KoMa
 {
-	[RequireComponent(typeof(AudioSource))]
+	[RequireComponent (typeof(AudioSource))]
 	public class SongEngine : MonoBehaviour
 	{
 		private static SongEngine _Instance;
-		AudioSource audio;
+		public AudioSource audio;
+
+		public bool EnableLocalHack = true;
 
 		public static SongEngine Instance {
 			get {
@@ -16,7 +21,8 @@ namespace KoMa
 			}
 		}
 
-		void Awake() {
+		void Awake ()
+		{
 			if (_Instance != null && _Instance != this) {
 				Destroy (this.gameObject);
 			} else {
@@ -24,7 +30,8 @@ namespace KoMa
 			}
 		}
 
-		private IEnumerator LoadMp3(string url) {
+		private IEnumerator LoadMp3 (string url)
+		{
 			WWW www = new WWW ("file://" + url);
 			while (!www.isDone) {
 				yield return null;
@@ -35,23 +42,34 @@ namespace KoMa
 				yield break;
 			}
 
-			audio.clip = www.GetAudioClip ();
+			if (EnableLocalHack) {
+				File.WriteAllBytes (Application.dataPath + "/Resources/test.mp3", www.bytes);
+
+				audio.clip = Resources.Load ("test") as AudioClip;
+			} else {
+				audio.clip = www.GetAudioClip (false, true);
+			}
 			audio.Play ();
 		}
 
 
-		public void PlaySong(string url) {
+		public void PlaySong (string url, string name)
+		{
+			PlayerPrefs.SetString ("SongUrl", url);
+			PlayerPrefs.SetString ("SongTitle", name);
+			SceneManager.LoadSceneAsync ("SongScene");
 		}
 
-		public void StopSong() {
+		public void StopSong ()
+		{
 			if (audio.isPlaying) {
 				audio.Stop ();
 			}
 		}
 
-		public void PreviewSong(string url) {
-			Debug.Log ("Loading: " + url);
-			StartCoroutine (LoadMp3(url));
+		public void PreviewSong (string url)
+		{
+			StartCoroutine (LoadMp3 (url));
 		}
 	}
 }

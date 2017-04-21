@@ -6,49 +6,56 @@ using System.IO;
 
 namespace KoMa
 {
-public class SongEntry : MonoBehaviour {
+	public class SongEntry : MonoBehaviour
+	{
+		private string mp3;
+		private string title;
 
-	private string mp3;
+		private IEnumerator LoadJob (string url)
+		{
+			WWW www = new WWW ("file://" + url);
+			while (!www.isDone) {
+				yield return null;
+			}
 
-	private IEnumerator LoadJob(string url) {
-		WWW www = new WWW ("file://" + url);
-		while (!www.isDone) {
-			yield return null;
+			if (!www.isDone || !string.IsNullOrEmpty (www.error)) {
+				Debug.LogError ("Error loading: " + url);
+				yield break;
+			}
+
+			gameObject.GetComponentsInChildren<Image> () [1].sprite = Sprite.Create (
+				www.textureNonReadable, new Rect (0, 0, www.textureNonReadable.width, www.textureNonReadable.height), 
+				new Vector2 (0, 0));
 		}
 
-		if (!www.isDone || !string.IsNullOrEmpty (www.error)) {
-			Debug.LogError ("Error loading: " + url);
-			yield break;
+		private string GetJpgFilename (string folder)
+		{
+			return Directory.GetFiles (folder, "*.jpg", SearchOption.TopDirectoryOnly) [0];
 		}
 
-		gameObject.GetComponentsInChildren<Image> ()[1].sprite = Sprite.Create (
-			www.textureNonReadable, new Rect (0, 0, www.textureNonReadable.width, www.textureNonReadable.height), 
-			new Vector2(0, 0));
-	}
+		public void ChangeEntry (string folder, string topLevelFolder)
+		{
+			title = folder.Substring (topLevelFolder.Length + 1);
+			gameObject.GetComponentInChildren<Button> ().GetComponentInChildren <Text> ().text = title;
 
-	private string GetJpgFilename(string folder) {
-		return Directory.GetFiles (folder, "*.jpg", SearchOption.TopDirectoryOnly) [0];
-	}
+			mp3 = Directory.GetFiles (folder, "*.mp3", SearchOption.TopDirectoryOnly) [0];
 
-	public void ChangeEntry(string folder, string topLevelFolder) {
-		gameObject.GetComponentInChildren<Button>().GetComponentInChildren <Text>().text = 
-			folder.Substring (topLevelFolder.Length + 1);
+			StartCoroutine (LoadJob (GetJpgFilename (folder)));
+		}
 
-		mp3 = Directory.GetFiles (folder, "*.mp3", SearchOption.TopDirectoryOnly) [0];
+		public void StartMe ()
+		{
+			SongEngine.Instance.PlaySong (mp3, title);		
+		}
 
-		StartCoroutine (LoadJob(GetJpgFilename(folder)));
-	}
-
-	public void StartMe() {
-			SongEngine.Instance.PlaySong (mp3);		
-	}
-
-	public void StopMe() {
+		public void StopMe ()
+		{
 			SongEngine.Instance.StopSong ();
-	}
+		}
 
-	public void PreviewMe() {
+		public void PreviewMe ()
+		{
 			SongEngine.Instance.PreviewSong (mp3);
+		}
 	}
-}
 }

@@ -1,11 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\SongList.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\SongMenu.cs">
     <Files>
-      <File FileName="Assets\Scripts\SongEngine.cs" Line="49" Column="5" />
-      <File FileName="Assets\Scripts\Menu.cs" Line="39" Column="2" />
-      <File FileName="Assets\Scripts\SongEntry.cs" Line="13" Column="1" />
-      <File FileName="Assets\Scripts\SongList.cs" Line="32" Column="64" />
+      <File FileName="Assets\Scripts\SongEngine.cs" Line="59" Column="37" />
+      <File FileName="Assets\Scripts\SongEntry.cs" Line="48" Column="44" />
+      <File FileName="Assets\Scripts\SongList.cs" Line="42" Column="48" />
+      <File FileName="Assets\Scripts\JoinMenu.cs" Line="13" Column="47" />
+      <File FileName="Assets\Scripts\Menu.cs" Line="26" Column="30" />
+      <File FileName="Assets\Scripts\PlayerProfilesMenu.cs" Line="36" Column="30" />
+      <File FileName="Assets\Scripts\Version.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\SongMenu.cs" Line="15" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
