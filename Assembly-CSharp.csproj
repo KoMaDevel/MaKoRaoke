@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{9D8E9815-3C5C-179A-5DAE-A1B5D35D0567}</ProjectGuid>
+    <ProjectGuid>{94BDE355-2211-D4D2-B7EE-E2EEDF7B449F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\SongEngine.cs" />
      <Compile Include="Assets\Scripts\Version.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity560f3/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
